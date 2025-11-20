@@ -1,69 +1,26 @@
 <x-layouts.app :title="__('Room Details')">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div>
-            {{-- <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $room->name }}</h1> --}}
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Room name</h1>
-            {{-- <p class="text-sm text-gray-500 dark:text-gray-400">A <span
-                    class="underline font-medium">{{ $room->type->value }}</span> room created on <time
-                    datetime="2023-03-17T00:00Z">{{ $room->created_at->toDayDateTimeString() }}</time> by
-                {{ $room->user->name }}</p> --}}
-            <p class="text-sm text-gray-500 dark:text-gray-400">A <span class="underline font-medium"></span> room created
-                on <time datetime="2023-03-17T00:00Z"></time> by
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $room->name }}</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+                A <span class="underline font-medium">{{ $room->type->value }}</span>
+                room created on
+                <time datetime="{{ $room->created_at }}">
+                    {{ $room->created_at->timezone('Asia/Dhaka')->toDayDateTimeString() }}
+                </time>
+                by {{ $room->user->name }}
             </p>
+
         </div>
         <div class="grid grid-cols-12 gap-4">
-            {{-- @livewire('room.users', ['room' => $room]) --}}
-            <div class="col-span-4 p-4 rounded-md shadow-sm border bg-white">
-                <h2 class="text-lg font-medium">Users</h2>
-
-                <ul role="list" class="divide-y mt-4 divide-gray-100 dark:divide-white/5">
-                    @for ($i = 0; $i <= 5; $i++)
-                        <li class="flex gap-x-2.5 py-3.5">
-                            {{-- <flux:avatar tooltip="{{ $user->name }}" name="{{ $user->initials() }}" --}}
-                            <flux:avatar tooltip="omar" name="omar"
-                                class="size-10 flex-none rounded-full bg-gray-50 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10" />
-                            <div class="min-w-0">
-                                <div class="inline-flex">
-                                    {{-- <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">{{ $user->name }}
-                                    </p> --}}
-                                    <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">name
-                                    </p>
-                                    {{-- @if (in_array($user->id, $typingIds))
-                                        <span class="animate-pulse ml-2 text-xs text-green-800">typing...</span>
-                                    @endif --}}
-                                </div>
-                                {{-- <p class="truncate text-xs/5 text-gray-500 dark:text-gray-400">{{ $user->email }}</p> --}}
-                                <p class="truncate text-xs/5 text-gray-500 dark:text-gray-400">email</p>
-                            </div>
-                        </li>
-                    @endfor
-                </ul>
-
-            </div>
+            @livewire('rooms.user', ['room' => $room])
 
             {{-- end of room user --}}
 
             <div class="col-span-8 w-full rounded-md shadow-sm border p-4 overflow-hidden bg-white">
                 <div class="flex flex-col h-full justify-between space-y-4">
-                    {{-- @livewire('room.messages', ['room' => $room]) --}}
-                    <div class="flex space-x-3 justify-end bg-slate-200">
-                        <div>
-                            {{-- <p
-                                class="inline-flex  w-full justify-end text-sm/6 font-semibold text-gray-900 dark:text-white">
-                                <span
-                                    class="text-xs/5 mr-2 font-normal text-gray-500 dark:text-gray-400">{{ $message->getHumanDate() }}·
-                                </span>You </p> --}}
-                                    <p
-                                class="inline-flex  w-full justify-end text-sm/6 font-semibold text-gray-900 dark:text-white">
-                                <span
-                                    class="text-xs/5 mr-2 font-normal text-gray-500 dark:text-gray-400">·
-                                </span>You </p>
-                            <div class="mt-1 text-sm/6 text-gray-700 dark:text-gray-300">
-                                {{-- <p>{{ $message->body }}</p> --}}
-                                <p>body</p>
-                            </div>
-                        </div>
-                    </div>
+                    @livewire('rooms.messages', ['room' => $room])
+
                     <!-- compose message -->
                     {{-- @livewire('room.message-compose', ['room' => $room]) --}}
                     <form wire:submit="submit" class="flex items-start space-x-4">

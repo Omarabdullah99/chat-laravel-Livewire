@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="flex flex-none items-center gap-x-4">
-                <a href="{{}}"
+                <a href="{{route('rooms.show', $room)}}"
                     class="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:block dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring-white/5 dark:hover:bg-white/20">View
                     room</a>
             </div>

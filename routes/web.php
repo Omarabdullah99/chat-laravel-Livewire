@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Rooms\RoomShowController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -15,7 +17,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::view('rooms/{room}', 'rooms.show')
+Route::get('rooms/{room:slug}', RoomShowController::class)
     ->middleware(['auth', 'verified'])
     ->name('rooms.show');
 
