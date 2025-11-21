@@ -11,7 +11,8 @@ class Message extends Model
     /** @use HasFactory<\Database\Factories\MessageFactory> */
     use HasFactory;
     protected $fillable = [
-        'body',
+        'user_id',
+        'body'
     ];
 
     public function isOwn(): bool
