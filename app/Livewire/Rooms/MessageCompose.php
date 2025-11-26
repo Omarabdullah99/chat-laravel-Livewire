@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Rooms;
 
+use App\Events\MessageCreated;
 use App\Livewire\Forms\RoomMessageForm;
 use App\Models\Room;
 use Livewire\Component;
@@ -22,6 +23,8 @@ class MessageCompose extends Component
         $this->form->reset();
 
         $this->dispatch('message.sent', $message->id);
+
+        broadcast(new MessageCreated($this->room, $message))->toOthers();
     }
     public function render()
     {
